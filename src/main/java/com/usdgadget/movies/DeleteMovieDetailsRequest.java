@@ -10,7 +10,6 @@ package com.usdgadget.movies;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="MovieDetails" type="{http://usdgadget.com/movies}MovieDetails"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +35,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "movieDetails"
+    "id"
 })
-@XmlRootElement(name = "GetMovieDetailsResponse")
-public class GetMovieDetailsResponse {
+@XmlRootElement(name = "DeleteMovieDetailsRequest")
+public class DeleteMovieDetailsRequest {
 
-    @XmlElement(name = "MovieDetails", required = true)
-    protected MovieDetails movieDetails;
+    protected int id;
 
     /**
-     * Gets the value of the movieDetails property.
+     * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MovieDetails }
-     *     
      */
-    public MovieDetails getMovieDetails() {
-        return movieDetails;
+    public int getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the movieDetails property.
+     * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MovieDetails }
-     *     
      */
-    public void setMovieDetails(MovieDetails value) {
-        this.movieDetails = value;
+    public void setId(int value) {
+        this.id = value;
     }
 
 }

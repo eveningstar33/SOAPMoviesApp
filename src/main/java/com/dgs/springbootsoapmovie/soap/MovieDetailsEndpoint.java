@@ -10,6 +10,9 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.dgs.springbootsoapmovie.soap.bean.Movie;
 import com.dgs.springbootsoapmovie.soap.service.MovieDetailsService;
+import com.dgs.springbootsoapmovie.soap.service.MovieDetailsService.Status;
+import com.usdgadget.movies.DeleteMovieDetailsRequest;
+import com.usdgadget.movies.DeleteMovieDetailsResponse;
 import com.usdgadget.movies.GetAllMovieDetailsRequest;
 import com.usdgadget.movies.GetAllMovieDetailsResponse;
 import com.usdgadget.movies.GetMovieDetailsRequest;
@@ -47,10 +50,31 @@ public class MovieDetailsEndpoint {
 		return mapAllMoviesDetails(movies); 
 	}
 	
+	@PayloadRoot(namespace = "http://usdgadget.com/movies", localPart = "DeleteMovieDetailsRequest")
+	@ResponsePayload
+	public DeleteMovieDetailsResponse deleteMovieDetailsRequest(@RequestPayload DeleteMovieDetailsRequest request) {
+				
+		Status status = service.deleteMovieById(request.getId());  // This status which we are getting from the service is of the type MovieDetailsService.Status				 
+		DeleteMovieDetailsResponse response = new DeleteMovieDetailsResponse();
+		response.setStatus(mapStatus(status));   // This status with setStatus() method uses a different status, this is actualy from 
+												 // the XSD Java object.. and we need to map the status class from the service to be 
+        										 // the other status class which is defined in the bean
+						
+		return response; 
+	}
+	
+	private com.usdgadget.movies.Status mapStatus(Status status) { 
+
+		if (status == Status.FAILURE) {
+			return com.usdgadget.movies.Status.FAILURE;
+		}
+		
+		return com.usdgadget.movies.Status.SUCCESS;
+	}
+
 	private GetMovieDetailsResponse mapMovieDetails(Movie movie) {
 		
 		GetMovieDetailsResponse response = new GetMovieDetailsResponse();
-		
 		response.setMovieDetails(mapMovie(movie)); 
 		
 		return response;
@@ -59,7 +83,6 @@ public class MovieDetailsEndpoint {
 	private GetAllMovieDetailsResponse mapAllMoviesDetails(List<Movie> movies) {
 		
 		GetAllMovieDetailsResponse response = new GetAllMovieDetailsResponse();
-		
 		for (Movie movie : movies) {
 			
 			MovieDetails movieDetails = mapMovie(movie);
@@ -71,12 +94,9 @@ public class MovieDetailsEndpoint {
 	
 	private MovieDetails mapMovie(Movie movie) {
 		
-		MovieDetails movieDetails = new MovieDetails();
-						
+		MovieDetails movieDetails = new MovieDetails();						
 		movieDetails.setId(movie.getId());
-		
 		movieDetails.setName(movie.getName()); 
-		
 		movieDetails.setGenre(movie.getGenre()); 
 				
 		return movieDetails;

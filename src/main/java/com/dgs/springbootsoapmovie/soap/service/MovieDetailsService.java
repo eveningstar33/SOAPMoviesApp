@@ -1,6 +1,7 @@
 package com.dgs.springbootsoapmovie.soap.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,11 @@ import com.dgs.springbootsoapmovie.soap.repository.MovieRepository;
 
 @Service
 public class MovieDetailsService implements MovieService {
+	
+	public enum Status {
+		
+		SUCCESS, FAILURE;
+	}
 
 	@Autowired
 	private MovieRepository movieRepository;
@@ -31,6 +37,24 @@ public class MovieDetailsService implements MovieService {
 		movieRepository.findAll().forEach(c -> movies.add(c)); 
 		
 		return movies;
+	}
+
+	@Override
+	public Status deleteMovieById(int id) {
+
+		List<Movie> movies = new ArrayList<>();
+		
+		movieRepository.findAll().forEach(c -> movies.add(c)); 
+		
+		Iterator<Movie> iterator = movies.iterator(); 
+		while (iterator.hasNext()) {
+			Movie movie = iterator.next();
+			if (movie.getId() == id) {
+				movieRepository.deleteById(id); 
+				return Status.SUCCESS;
+			}
+		}
+		return Status.FAILURE;
 	}
 
 }
