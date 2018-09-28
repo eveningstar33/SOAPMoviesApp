@@ -1,5 +1,7 @@
 package com.dgs.springbootsoapmovie.soap;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -8,6 +10,8 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.dgs.springbootsoapmovie.soap.bean.Movie;
 import com.dgs.springbootsoapmovie.soap.service.MovieDetailsService;
+import com.usdgadget.movies.GetAllMovieDetailsRequest;
+import com.usdgadget.movies.GetAllMovieDetailsResponse;
 import com.usdgadget.movies.GetMovieDetailsRequest;
 import com.usdgadget.movies.GetMovieDetailsResponse;
 import com.usdgadget.movies.MovieDetails;
@@ -34,12 +38,34 @@ public class MovieDetailsEndpoint {
 		return mapMovieDetails(movie); 
 	}
 	
+	@PayloadRoot(namespace = "http://usdgadget.com/movies", localPart = "GetAllMovieDetailsRequest")
+	@ResponsePayload
+	public GetAllMovieDetailsResponse processAllMovieDetailsRequest(@RequestPayload GetAllMovieDetailsRequest request) {
+				
+		List<Movie> movies = service.getAllMovies();  
+						
+		return mapAllMoviesDetails(movies); 
+	}
+	
 	private GetMovieDetailsResponse mapMovieDetails(Movie movie) {
 		
 		GetMovieDetailsResponse response = new GetMovieDetailsResponse();
 		
 		response.setMovieDetails(mapMovie(movie)); 
 		
+		return response;
+	}
+	
+	private GetAllMovieDetailsResponse mapAllMoviesDetails(List<Movie> movies) {
+		
+		GetAllMovieDetailsResponse response = new GetAllMovieDetailsResponse();
+		
+		for (Movie movie : movies) {
+			
+			MovieDetails movieDetails = mapMovie(movie);
+			response.getMovieDetails().add(movieDetails); 
+		}
+				
 		return response;
 	}
 	

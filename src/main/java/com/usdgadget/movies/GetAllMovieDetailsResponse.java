@@ -8,6 +8,8 @@
 
 package com.usdgadget.movies;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="MovieDetails" type="{http://usdgadget.com/movies}MovieDetails"/>
+ *         &lt;element name="MovieDetails" type="{http://usdgadget.com/movies}MovieDetails" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,34 +40,39 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "movieDetails"
 })
-@XmlRootElement(name = "GetMovieDetailsResponse")
-public class GetMovieDetailsResponse {
+@XmlRootElement(name = "GetAllMovieDetailsResponse")
+public class GetAllMovieDetailsResponse {
 
     @XmlElement(name = "MovieDetails", required = true)
-    protected MovieDetails movieDetails;
+    protected List<MovieDetails> movieDetails;
 
     /**
      * Gets the value of the movieDetails property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MovieDetails }
-     *     
-     */
-    public MovieDetails getMovieDetails() {
-        return movieDetails;
-    }
-
-    /**
-     * Sets the value of the movieDetails property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the movieDetails property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MovieDetails }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getMovieDetails().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link MovieDetails }
+     * 
+     * 
      */
-    public void setMovieDetails(MovieDetails value) {
-        this.movieDetails = value;
+    public List<MovieDetails> getMovieDetails() {
+        if (movieDetails == null) {
+            movieDetails = new ArrayList<MovieDetails>();
+        }
+        return this.movieDetails;
     }
 
 }

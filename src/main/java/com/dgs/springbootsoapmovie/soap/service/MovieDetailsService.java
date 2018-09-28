@@ -1,5 +1,8 @@
 package com.dgs.springbootsoapmovie.soap.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,16 @@ public class MovieDetailsService implements MovieService {
 		Movie movie = movieRepository.findMovieById(id);
 		
 		return movie;
+	}
+
+	@Override
+	public List<Movie> getAllMovies() {
+
+		List<Movie> movies = new ArrayList<>();
+		
+		movieRepository.findAll().forEach(c -> movies.add(c)); 
+		
+		return movies;
 	}
 
 }

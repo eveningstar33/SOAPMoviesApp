@@ -10,7 +10,6 @@ package com.usdgadget.movies;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,9 +23,6 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="MovieDetails" type="{http://usdgadget.com/movies}MovieDetails"/>
- *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -35,37 +31,9 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "movieDetails"
-})
-@XmlRootElement(name = "GetMovieDetailsResponse")
-public class GetMovieDetailsResponse {
+@XmlType(name = "")
+@XmlRootElement(name = "GetAllMovieDetailsRequest")
+public class GetAllMovieDetailsRequest {
 
-    @XmlElement(name = "MovieDetails", required = true)
-    protected MovieDetails movieDetails;
-
-    /**
-     * Gets the value of the movieDetails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MovieDetails }
-     *     
-     */
-    public MovieDetails getMovieDetails() {
-        return movieDetails;
-    }
-
-    /**
-     * Sets the value of the movieDetails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MovieDetails }
-     *     
-     */
-    public void setMovieDetails(MovieDetails value) {
-        this.movieDetails = value;
-    }
 
 }

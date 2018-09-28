@@ -18,6 +18,20 @@ xmlns:tns="http://usdgadget.com/movies" elementFormDefault="qualified">
 			</xs:sequence>
 		</xs:complexType>
     </xs:element>
+    
+	<xs:element name="GetAllMovieDetailsRequest">
+		<xs:complexType>
+		</xs:complexType>
+    </xs:element>
+	
+	<xs:element name="GetAllMovieDetailsResponse">
+        <xs:complexType>
+			<xs:sequence>
+				<xs:element name="MovieDetails" type="tns:MovieDetails" 
+							maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+    </xs:element>  
 	
 	<xs:complexType name="MovieDetails">
 		<xs:sequence>
