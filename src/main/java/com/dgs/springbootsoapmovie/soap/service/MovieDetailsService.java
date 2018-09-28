@@ -1,13 +1,23 @@
 package com.dgs.springbootsoapmovie.soap.service;
 
-import com.dgs.springbootsoapmovie.soap.bean.Movie;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.dgs.springbootsoapmovie.soap.bean.Movie;
+import com.dgs.springbootsoapmovie.soap.repository.MovieRepository;
+
+@Service
 public class MovieDetailsService implements MovieService {
 
+	@Autowired
+	private MovieRepository movieRepository;
+	
 	@Override
 	public Movie getMovieById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Movie movie = movieRepository.findMovieById(id);
+		
+		return movie;
 	}
 
 }
