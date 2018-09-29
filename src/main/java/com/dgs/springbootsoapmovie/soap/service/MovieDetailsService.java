@@ -57,4 +57,18 @@ public class MovieDetailsService implements MovieService {
 		return Status.FAILURE;
 	}
 
+	@Override
+	public Status addMovie(Movie movie) {
+		
+		List<Movie> movies = (List<Movie>) movieRepository.findMovieByName(movie.getName()); 
+				
+		if (movies.size() > 0) {
+			return Status.FAILURE;
+		} else {
+			movieRepository.save(movie); 
+		}
+		
+		return Status.SUCCESS; 
+	}
+
 }

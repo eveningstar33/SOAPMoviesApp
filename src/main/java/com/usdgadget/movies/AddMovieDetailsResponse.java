@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="Status" type="{http://usdgadget.com/movies}Status"/>
  *         &lt;element name="MovieDetails" type="{http://usdgadget.com/movies}MovieDetails"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -36,13 +37,40 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "status",
     "movieDetails"
 })
-@XmlRootElement(name = "GetMovieDetailsResponse")
-public class GetMovieDetailsResponse {
+@XmlRootElement(name = "AddMovieDetailsResponse")
+public class AddMovieDetailsResponse {
 
+    @XmlElement(name = "Status", required = true)
+    protected Status status;
     @XmlElement(name = "MovieDetails", required = true)
     protected MovieDetails movieDetails;
+
+    /**
+     * Gets the value of the status property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Status }
+     *     
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the value of the status property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Status }
+     *     
+     */
+    public void setStatus(Status value) {
+        this.status = value;
+    }
 
     /**
      * Gets the value of the movieDetails property.

@@ -11,6 +11,8 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.dgs.springbootsoapmovie.soap.bean.Movie;
 import com.dgs.springbootsoapmovie.soap.service.MovieDetailsService;
 import com.dgs.springbootsoapmovie.soap.service.MovieDetailsService.Status;
+import com.usdgadget.movies.AddMovieDetailsRequest;
+import com.usdgadget.movies.AddMovieDetailsResponse;
 import com.usdgadget.movies.DeleteMovieDetailsRequest;
 import com.usdgadget.movies.DeleteMovieDetailsResponse;
 import com.usdgadget.movies.GetAllMovieDetailsRequest;
@@ -48,6 +50,27 @@ public class MovieDetailsEndpoint {
 		List<Movie> movies = service.getAllMovies();  
 						
 		return mapAllMoviesDetails(movies); 
+	}
+	
+	@PayloadRoot(namespace = "http://usdgadget.com/movies", localPart = "AddMovieDetailsRequest")
+	@ResponsePayload
+	public AddMovieDetailsResponse addMovieDetailsRequest(@RequestPayload AddMovieDetailsRequest request) {
+				
+		AddMovieDetailsResponse response = new AddMovieDetailsResponse(); 
+		
+		Movie movie = new Movie();
+		movie.setName(request.getName()); 
+		movie.setGenre(request.getGenre()); 
+		
+		Status status = service.addMovie(movie);
+		
+		if (status == Status.SUCCESS) {  
+			response.setMovieDetails(mapMovie(movie)); 
+		}
+		
+		response.setStatus(mapStatus(status)); 
+		
+		return response; 
 	}
 	
 	@PayloadRoot(namespace = "http://usdgadget.com/movies", localPart = "DeleteMovieDetailsRequest")

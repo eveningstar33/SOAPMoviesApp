@@ -10,4 +10,5 @@ public interface MovieService {
 	public Movie getMovieById(int id);
 	public List<Movie> getAllMovies();
 	public Status deleteMovieById(int id);
+	public Status addMovie(Movie movie);
 }
