@@ -11,4 +11,5 @@ public interface MovieService {
 	public List<Movie> getAllMovies();
 	public Status deleteMovieById(int id);
 	public Status addMovie(Movie movie);
+	public void updateMovie(Movie movie);
 }

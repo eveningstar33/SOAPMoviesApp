@@ -67,6 +67,22 @@ xmlns:tns="http://usdgadget.com/movies" elementFormDefault="qualified">
 		</xs:complexType>
     </xs:element>
     
+    <xs:element name="UpdateMovieDetailsRequest">
+        <xs:complexType>
+			<xs:sequence>
+				<xs:element name="MovieDetails" type="tns:MovieDetails" />
+			</xs:sequence>
+		</xs:complexType>
+    </xs:element>
+	
+	<xs:element name="UpdateMovieDetailsResponse">
+        <xs:complexType>
+			<xs:sequence>
+				<xs:element name="Status" type="tns:Status" />
+			</xs:sequence>
+		</xs:complexType>
+    </xs:element>
+    
     <xs:simpleType name="Status">
     	<xs:restriction base="xs:string">
     		<xs:enumeration value="SUCCESS" />

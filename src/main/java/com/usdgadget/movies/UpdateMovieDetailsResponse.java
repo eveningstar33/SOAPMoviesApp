@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="status" type="{http://usdgadget.com/movies}Status"/>
+ *         &lt;element name="Status" type="{http://usdgadget.com/movies}Status"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,10 +38,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "status"
 })
-@XmlRootElement(name = "DeleteMovieDetailsResponse")
-public class DeleteMovieDetailsResponse {
+@XmlRootElement(name = "UpdateMovieDetailsResponse")
+public class UpdateMovieDetailsResponse {
 
-    @XmlElement(required = true)
+    @XmlElement(name = "Status", required = true)
     protected Status status;
 
     /**

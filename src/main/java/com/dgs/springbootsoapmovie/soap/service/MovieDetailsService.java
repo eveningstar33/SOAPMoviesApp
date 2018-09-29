@@ -71,4 +71,9 @@ public class MovieDetailsService implements MovieService {
 		return Status.SUCCESS; 
 	}
 
+	@Override
+	public void updateMovie(Movie movie) {
+
+		movieRepository.save(movie); 
+	}
 }

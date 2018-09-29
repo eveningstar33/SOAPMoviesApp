@@ -20,6 +20,8 @@ import com.usdgadget.movies.GetAllMovieDetailsResponse;
 import com.usdgadget.movies.GetMovieDetailsRequest;
 import com.usdgadget.movies.GetMovieDetailsResponse;
 import com.usdgadget.movies.MovieDetails;
+import com.usdgadget.movies.UpdateMovieDetailsRequest;
+import com.usdgadget.movies.UpdateMovieDetailsResponse;
 
 @Endpoint
 public class MovieDetailsEndpoint {
@@ -73,6 +75,21 @@ public class MovieDetailsEndpoint {
 		return response; 
 	}
 	
+	@PayloadRoot(namespace = "http://usdgadget.com/movies", localPart = "UpdateMovieDetailsRequest")
+	@ResponsePayload
+	public UpdateMovieDetailsResponse updateMovieDetailsRequest(@RequestPayload UpdateMovieDetailsRequest request) {
+				
+		UpdateMovieDetailsResponse response = new UpdateMovieDetailsResponse();
+		MovieDetails movieDetails = request.getMovieDetails();
+		
+		Movie movie = mapMovieDetails(movieDetails);
+		
+		service.updateMovie(movie); 
+		response.setStatus(com.usdgadget.movies.Status.SUCCESS); 
+						
+		return response; 
+	}
+	
 	@PayloadRoot(namespace = "http://usdgadget.com/movies", localPart = "DeleteMovieDetailsRequest")
 	@ResponsePayload
 	public DeleteMovieDetailsResponse deleteMovieDetailsRequest(@RequestPayload DeleteMovieDetailsRequest request) {
@@ -123,5 +140,15 @@ public class MovieDetailsEndpoint {
 		movieDetails.setGenre(movie.getGenre()); 
 				
 		return movieDetails;
+	}
+	
+	private Movie mapMovieDetails(MovieDetails movieDetails) {
+		
+		Movie movie = new Movie();
+		movie.setId(movieDetails.getId()); 
+		movie.setName(movieDetails.getName()); 
+		movie.setGenre(movieDetails.getGenre());
+
+		return movie;
 	}
 }
