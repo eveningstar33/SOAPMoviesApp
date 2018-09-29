@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.dgs.springbootsoapmovie.soap.bean.Movie;
+import com.dgs.springbootsoapmovie.soap.exception.MovieNotFoundException;
 import com.dgs.springbootsoapmovie.soap.service.MovieDetailsService;
 import com.dgs.springbootsoapmovie.soap.service.MovieDetailsService.Status;
 import com.usdgadget.movies.AddMovieDetailsRequest;
@@ -41,6 +42,9 @@ public class MovieDetailsEndpoint {
 	public GetMovieDetailsResponse processMovieDetailsRequest(@RequestPayload GetMovieDetailsRequest request) {
 				
 		Movie movie = service.getMovieById(request.getId());  
+		
+		if (movie == null) 
+			throw new MovieNotFoundException("Invalid Movie Id " + request.getId());
 						
 		return mapMovieDetails(movie); 
 	}
